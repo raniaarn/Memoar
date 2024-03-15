@@ -1,4 +1,4 @@
-import { Flex, Stack, Heading, FormControl, Input, Button, Center } from "@chakra-ui/react"
+import { Flex, Stack, Heading, FormControl, Input, InputGroup, InputRightElement, IconButton } from "@chakra-ui/react"
 import { useState } from "react"
 import { useMutation } from "@/components"
 import toast from 'react-hot-toast';
@@ -6,6 +6,7 @@ import Cookies from 'js-cookie'
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 const LayoutComponent = dynamic(
   () => import('@/components/Layout').then(mod => mod.Layout)
@@ -18,6 +19,7 @@ export default function Login() {
     email: "",
     password: ""
   })
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async () => {
     const response = await mutate({
@@ -39,6 +41,11 @@ export default function Login() {
     router.push('/');
   }
 
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+
   return (
     <LayoutComponent metaTitle="Login" metaDescription="Join Memoar">
       <Flex alignItems="center" justifyContent="center">
@@ -54,12 +61,22 @@ export default function Login() {
             />
           </FormControl>
           <FormControl>
-            <Input
-              value={payload?.password}
-              onChange={(event) => setPayload({ ...payload, password: event.target.value })}
-              placeholder="password"
-              type="password"
-            />
+            <InputGroup>
+              <Input
+                value={payload?.password}
+                onChange={(event) => setPayload({ ...payload, password: event.target.value })}
+                placeholder="password"
+                type={showPassword ? 'text' : 'password'}
+              />
+              <InputRightElement width="4.5rem">
+                <IconButton
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                  onClick={handleTogglePasswordVisibility}
+                  variant="ghost"
+                />
+              </InputRightElement>
+            </InputGroup>
           </FormControl>
           <FormControl alignItems="center" justifyContent="center">
             <button

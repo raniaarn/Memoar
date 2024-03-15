@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { DropDownProps } from './interface';
+import Link from 'next/link';
 
 export const DropDown = ({ username }: DropDownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -70,16 +71,16 @@ export const DropDown = ({ username }: DropDownProps) => {
             aria-labelledby='options-menu'
           >
             <div className='py-1'>
+              <Link href="/profile">
+                <div className='block px-4 py-2 text-sm hover:bg-green-300 hover:rounded-2xl cursor-pointer'>
+                  Profile
+                </div>
+              </Link>
               <div
                 className='block px-4 py-2 text-sm hover:bg-red-500 hover:rounded-2xl cursor-pointer'
                 onClick={handleLogout}
               >
                 Logout
-              </div>
-              <div
-                className='block px-4 py-2 text-sm hover:bg-green-300 hover:rounded-2xl cursor-pointer'
-              >
-                Profile
               </div>
             </div>
           </div>
