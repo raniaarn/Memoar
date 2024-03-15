@@ -21,9 +21,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, metaTitle, metaDescrip
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <div className="mx-auto my-auto h-screen flex flex-col justify-center items-center">
         {children}
-      </div>
       <Footer />
     </>
   );

@@ -15,7 +15,6 @@ export const Navbar = () => {
 
   const handleNavCollapse = () => setIsCollapsed(!isCollapsed)
 
-  console.log(userData)
   return (
     <nav className="fixed top-0 z-50 w-full flex flex-col md:items-center justify-center shadow-lg bg-white">
       <div className="flex items-center py-3 px-7 md:px-12 lg:px-16 xl:px-20 justify-between w-full">

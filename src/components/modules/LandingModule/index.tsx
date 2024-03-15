@@ -14,36 +14,39 @@ export const LandingModule = () => {
 
   return (
     <LayoutComponent metaTitle="Home" metaDescription="Welcome to Memoar">
-      <div className="px-12 w-full flex-col justify-start items-center gap-4 inline-flex">
-        <div className="relative md:w-[30%] w-[80%] aspect-[5.625/1] overflow-hidden">
-          <Image
-            src="/memoar.png"
-            alt="Memoar Logo"
-            layout="fill"
-            priority
-          />
-        </div>
-        <div className="text-black font-bold xl:text-[32px]">Ring the Bell of Your Memories!</div>
-        {!userData?.data ?
-          (
-            <Link href="/register">
-              <button
-                className="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-900 rounded-md justify-center items-center text-white text-lg">
-                Join Memoar now!
-              </button>
-            </Link>
-          ) :
-          (
-            <Link href="/">
-              <button
-                className="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-900 rounded-md justify-center items-center text-white text-lg">
-                See All Posts            
-                </button>
-            </Link>
-          )
-        }
+      <div className="mx-auto my-auto h-screen flex flex-col justify-center items-center">
 
-      </div>
+        <div className="px-12 w-full flex-col justify-start items-center gap-4 inline-flex">
+          <div className="relative md:w-[30%] w-[80%] aspect-[5.625/1] overflow-hidden">
+            <Image
+              src="/memoar.png"
+              alt="Memoar Logo"
+              layout="fill"
+              priority
+            />
+          </div>
+          <div className="text-black font-bold xl:text-[32px]">Ring the Bell of Your Memories!</div>
+          {!userData?.data ?
+            (
+              <Link href="/register">
+                <button
+                  className="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-900 rounded-md justify-center items-center text-white text-lg">
+                  Join Memoar now!
+                </button>
+              </Link>
+            ) :
+            (
+              <Link href="/posts">
+                <button
+                  className="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-900 rounded-md justify-center items-center text-white text-lg">
+                  See All Posts
+                </button>
+              </Link>
+            )
+          }
+
+        </div>
+        </div>
     </LayoutComponent>
   )
 }

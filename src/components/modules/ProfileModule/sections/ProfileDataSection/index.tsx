@@ -11,7 +11,6 @@ export const ProfileDataSection = () => {
       <div className="flex justify-center items-center bg-blue-600 text-white p-2 rounded-full w-[80px] h-[80px]  text-4xl">
         {firstName}
       </div>
-
       <div className="flex-col justify-start items-start gap-2 inline-flex">
         <div className="text-black text-3xl font-bold">{userData?.data.name}</div>
         <div className="text-black text-xl font-normal">{userData?.data.email}</div>

@@ -41,59 +41,62 @@ export default function Register() {
 
   return (
     <LayoutComponent metaTitle="Register" metaDescription="Join Memoar">
-      <Flex alignItems="center" justifyContent="center">
-        <Stack direction="column" spacing={4} alignItems="center" justifyContent="center">
-          <Heading as="h4" color="#0C50FF">
-            Register
-          </Heading>
-          <FormControl>
-            <Input
-              value={payload?.name}
-              onChange={(event) => setPayload({ ...payload, name: event.target.value })}
-              placeholder="name"
-            />
-          </FormControl>
-          <FormControl>
-            <Input
-              value={payload?.email}
-              onChange={(event) => setPayload({ ...payload, email: event.target.value })}
-              placeholder="email"
-            />
-          </FormControl>
-          <FormControl>
-            <InputGroup>
-              <Input
-                value={payload?.password}
-                onChange={(event) => setPayload({ ...payload, password: event.target.value })}
-                placeholder="password"
-                type={showPassword ? 'text' : 'password'}
-              />
-              <InputRightElement width="4.5rem">
-                <IconButton
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
-                  icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
-                  onClick={handleTogglePasswordVisibility}
-                  variant="ghost"
-                />
-              </InputRightElement>
-            </InputGroup>
-          </FormControl>
-          <FormControl alignItems="center" justifyContent="center">
-            <button
-              className="w-full px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-900 rounded-md justify-center items-center text-white text-sm"
-              onClick={() => handleSubmit()}>
+      <div className="mx-auto my-auto h-screen flex flex-col justify-center items-center">
+
+        <Flex alignItems="center" justifyContent="center">
+          <Stack direction="column" spacing={4} alignItems="center" justifyContent="center">
+            <Heading as="h4" color="#0C50FF">
               Register
-            </button>
-          </FormControl>
-          <div>
-            Do you have account?
-            <span className="font-bold">
-              <Link href="/"> Register Now
-              </Link>
-            </span>
-          </div>
-        </Stack>
-      </Flex>
+            </Heading>
+            <FormControl>
+              <Input
+                value={payload?.name}
+                onChange={(event) => setPayload({ ...payload, name: event.target.value })}
+                placeholder="name"
+              />
+            </FormControl>
+            <FormControl>
+              <Input
+                value={payload?.email}
+                onChange={(event) => setPayload({ ...payload, email: event.target.value })}
+                placeholder="email"
+              />
+            </FormControl>
+            <FormControl>
+              <InputGroup>
+                <Input
+                  value={payload?.password}
+                  onChange={(event) => setPayload({ ...payload, password: event.target.value })}
+                  placeholder="password"
+                  type={showPassword ? 'text' : 'password'}
+                />
+                <InputRightElement width="4.5rem">
+                  <IconButton
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                    onClick={handleTogglePasswordVisibility}
+                    variant="ghost"
+                  />
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+            <FormControl alignItems="center" justifyContent="center">
+              <button
+                className="w-full px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-900 rounded-md justify-center items-center text-white text-sm"
+                onClick={() => handleSubmit()}>
+                Register
+              </button>
+            </FormControl>
+            <div>
+              Already have an account?
+              <span className="font-bold">
+                <Link href="/login"> Login Now
+                </Link>
+              </span>
+            </div>
+          </Stack>
+        </Flex>
+      </div>
     </LayoutComponent>
   )
 }

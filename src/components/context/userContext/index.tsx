@@ -3,7 +3,7 @@ import { useQueries } from "@/components/hooks/useQueries";
 import Cookies from "js-cookie";
 import { UserData, userContextProviderProps } from "./interface";
 
-export const UserContext = createContext({});
+export const UserContext = createContext({} as UserData);
 
 export function UserContextProvider({ children, ...props }: userContextProviderProps) {
   const { data: userData } = useQueries({

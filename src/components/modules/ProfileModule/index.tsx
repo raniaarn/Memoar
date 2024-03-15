@@ -7,8 +7,11 @@ const LayoutComponent = dynamic(
 
 export const ProfileModule = () => (
   <LayoutComponent>
-    <section>
-      <ProfileDataSection />
-    </section>
+    <div className="mx-auto my-auto h-screen flex flex-col justify-center items-center">
+
+      <section>
+        <ProfileDataSection />
+      </section>
+    </div>
   </LayoutComponent>
 )
