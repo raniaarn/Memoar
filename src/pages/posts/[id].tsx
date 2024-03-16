@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const defaultPostData: PostDataProps = {
-  id: 0,
+  id: -1,
   description: "",
   user: {
     id: 0,
@@ -26,7 +26,6 @@ export default function Posts() {
   const router = useRouter()
   const id = router.query.id
   const [post, setPost] = useState<PostDataProps>(defaultPostData)
-
 
   useEffect(() => {
     getPostData()
@@ -50,18 +49,24 @@ export default function Posts() {
     }
   }
 
-  return (
-    <RepliesModule
-      id={post.id}
-      description={post.description}
-      user={post.user}
-      created_at={post.created_at}
-      updated_at={post.updated_at}
-      users_id={post.users_id}
-      likes_count={post.likes_count}
-      is_like_post={post.is_like_post}
-      is_own_post={post.is_own_post}
-      replies_count={post.replies_count} />
+  if ((post.id) !== -1) {
 
-  )
+    return (
+      <RepliesModule
+        id={post.id}
+        description={post.description}
+        user={post.user}
+        created_at={post.created_at}
+        updated_at={post.updated_at}
+        users_id={post.users_id}
+        likes_count={post.likes_count}
+        is_like_post={post.is_like_post}
+        is_own_post={post.is_own_post}
+        replies_count={post.replies_count} />
+
+    )
+  } else {
+    return null;
+  }
 }
+

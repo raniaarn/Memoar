@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { PostDataProps, ReplyDataProps } from '@/components/types/postData';
 import { useMutation, useQueries } from '@/components';
-import { ResponseDataInterface } from '@/components/types/responseData';
-import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import dynamic from 'next/dynamic';
 import { CardMini } from '@/components/elements/CardMini';
-import { Flex, Spinner } from '@chakra-ui/react';
 
 export const RepliesModule: React.FC<PostDataProps> = ({
   id,
@@ -15,33 +11,20 @@ export const RepliesModule: React.FC<PostDataProps> = ({
   user,
 }) => {
   const { mutate } = useMutation()
-  const [replies, setReplies] = useState<ReplyDataProps[]>([])
-  const [descriptionNew, setDescription] = useState<string>();
+  const [descriptionNew, setDescriptionNew] = useState<string>();
+
+  console.log(id)
 
   const LayoutComponent = dynamic(
     () => import('@/components/Layout').then(mod => mod.Layout)
   );
 
-  useEffect(() => {
-    getReplyData()
-  }, [])
-
-  const getReplyData = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API}/api/replies/post/${id}`,
-        {
-          headers: {
-            'Authorization': `Bearer ${Cookies.get('user_token')}`
-          }
-        }
-      )
-      const received = await response.json()
-      setReplies(received.data)
-    } catch (error: any) {
-      toast.error("gagal mengambil data")
+  const { data, isLoading } = useQueries({
+    prefixUrl: `${process.env.NEXT_PUBLIC_API}/api/replies/post/${id}`,
+    headers: {
+      'Authorization': `Bearer ${Cookies.get('user_token')}`
     }
-  }
+  })
 
   return (
     <LayoutComponent metaTitle="Post" metaDescription="Memoar Post">
@@ -64,22 +47,22 @@ export const RepliesModule: React.FC<PostDataProps> = ({
               </div>
             </div>
           </div>
-        <div className="w-full p-4 mx-auto bg-white rounded-[10px] shadow">
-          <textarea
-            className="w-full p-6 bg-blue-100 rounded-[10px] justify-start items-start gap-4 inline-flex"
-            value={descriptionNew}
-            onChange={(event) => setDescription(event.target.value)}
-            placeholder="What's happening ..."
-          />
-          <button
-            className="w-full px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-900 rounded-md justify-center items-center text-white text-lg"
+          <div className="w-full p-4 mx-auto bg-white rounded-[10px] shadow">
+            <textarea
+              className="w-full p-6 bg-blue-100 rounded-[10px] justify-start items-start gap-4 inline-flex"
+              value={descriptionNew}
+              onChange={(event) => setDescriptionNew(event.target.value)}
+              placeholder="What's happening ..."
+            />
+            <button
+              className="w-full px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-900 rounded-md justify-center items-center text-white text-lg"
             >
-            Reply
-          </button>
-        </div>
+              Reply
+            </button>
+          </div>
           <div className=" flex-col w-full justify-center items-center infline-flex">
             {
-              replies?.map((item: ReplyDataProps) => (
+              data?.data?.map((item: ReplyDataProps) => (
                 <div key={item.id} className="flex w-[90%] mx-auto flex-col gap-4">
                   <CardMini
                     posts_id={item.posts_id}
