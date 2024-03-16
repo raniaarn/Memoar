@@ -2,7 +2,6 @@ import { FloatingPostForm } from "@/components";
 import dynamic from "next/dynamic";
 import { useQueries } from "@/components";
 import Cookies from 'js-cookie';
-import { useState } from "react";
 import { PostDataProps } from "@/components/types/postData";
 import { Flex, Spinner } from "@chakra-ui/react";
 import { Card } from "@/components/elements/Card";
@@ -38,7 +37,7 @@ export const PostsModule = () => {
             </Flex>
           ) : (
             data?.data?.map((item: PostDataProps) => (
-              <div className="flex flex-col gap-4">
+              <div className="flex w-[90%] mx-auto flex-col gap-4">
                 <Card
                   id={item.id}
                   description={item.description}

@@ -16,6 +16,7 @@
         "prettier"
     ],
     "rules": {
+        
         "react/jsx-filename-extension": [
             1,
             {
@@ -39,7 +40,7 @@
                 }
             }
         ],
-        "beforeStatementContinuationChars": "never",
+        "beforeStatementContinuationChars": "off",
         "quotes": [
             2,
             "single",

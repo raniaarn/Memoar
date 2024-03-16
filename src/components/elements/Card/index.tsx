@@ -57,7 +57,7 @@ export const Card: React.FC<PostDataProps> = ({
             {(!is_like_post) ? (
               <HiOutlineHeart className="w-6 h-6" />
             ) : (
-              <HiHeart className="w-6 h-6" />
+              <HiHeart className="w-6 h-6 text-red-500" />
             )}
             {likes_count} Like
           </button>

@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { DropDownProps } from './interface';
 import Link from 'next/link';
+import { ResponseDataInterface } from '@/components/types/responseData';
 
 export const DropDown = ({ username }: DropDownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -25,7 +26,7 @@ export const DropDown = ({ username }: DropDownProps) => {
       headers: {
         'Authorization': `Bearer ${Cookies.get('user_token')}`
       }
-    })
+    }) as ResponseDataInterface
 
     if (!response?.result?.success) {
       console.log(response)

@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { ResponseDataInterface } from "@/components/types/responseData";
 
 const LayoutComponent = dynamic(
   () => import('@/components/Layout').then(mod => mod.Layout)
@@ -25,7 +26,7 @@ export default function Login() {
     const response = await mutate({
       prefixUrl: `${process.env.NEXT_PUBLIC_API}/api/login`,
       payload,
-    })
+    }) as ResponseDataInterface
 
     if (!response?.result?.success) {
       toast.error("Login Gagal")

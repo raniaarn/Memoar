@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useMutation } from "@/components";
 import Cookies from 'js-cookie';
 import { useRouter } from "next/router";
+import { ResponseDataInterface } from "@/components/types/responseData";
 
 export const FloatingPostForm = () => {
   const router = useRouter()
@@ -16,7 +17,7 @@ export const FloatingPostForm = () => {
       headers: {
         'Authorization': `Bearer ${Cookies.get('user_token')}`
       }
-    })
+    }) as ResponseDataInterface
 
     if (!response?.result?.success) {
       toast.error("Gagal posting :(")
