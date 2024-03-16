@@ -56,8 +56,8 @@ export const PostsModule = () => {
       const result = await response.json();
       if (result?.success) {
         router.reload();
+        toast.success("Berhasil menghapus post")
       }
-      toast.success("Berhasil menghapus post")
     } catch (error) {
       toast.error("gagal")
     }

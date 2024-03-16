@@ -23,7 +23,6 @@ export const FloatingPostForm = () => {
       toast.error("Gagal posting :(")
     } else {
       toast.success("Berhasil Post!")
-      router.reload()
     }
   }
 
