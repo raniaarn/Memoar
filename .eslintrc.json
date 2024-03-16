@@ -12,8 +12,7 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react",
-        "prettier"
+        "react"
     ],
     "rules": {
         
@@ -48,6 +47,5 @@
                 "avoidEscape": true
             }
         ],
-        "prettier/prettier": "error"
     }
 }
