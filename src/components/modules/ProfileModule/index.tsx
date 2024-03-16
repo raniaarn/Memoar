@@ -1,3 +1,4 @@
+import { FloatingPostForm } from "@/components";
 import { ProfileDataSection, OwnPostsSection } from "./sections"
 import dynamic from "next/dynamic";
 
@@ -7,9 +8,12 @@ const LayoutComponent = dynamic(
 
 export const ProfileModule = () => (
   <LayoutComponent metaTitle="Profile" metaDescription="My Profile">
-    <div className="mx-auto flex flex-col justify-center items-center">
-      <div className="mt-[120px] mb-[48px]">
-      <ProfileDataSection />
+    <div className=" mt-[100px] mb-[48px]">
+      <div className="sticky top-[100px] w-[90%] p-4 mx-auto bg-white rounded-[10px] shadow">
+        <div className="mb-4">
+        <ProfileDataSection />
+        </div>
+        <FloatingPostForm />
       </div>
       <OwnPostsSection />
     </div>

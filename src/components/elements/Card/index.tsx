@@ -2,6 +2,11 @@ import React from 'react'
 import { PostDataProps } from '@/components/types/postData';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { HiOutlineChat, HiOutlineHeart, HiHeart } from "react-icons/hi";
+import { useMutation } from '@/components';
+import { ResponseDataInterface } from '@/components/types/responseData';
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
 
 export const Card: React.FC<PostDataProps> = ({
   id,
@@ -15,7 +20,7 @@ export const Card: React.FC<PostDataProps> = ({
   is_like_post,
   is_own_post
 }) => {
-  function formatTimestampToDate(timestamp: string):string {
+  function formatTimestampToDate(timestamp: string): string {
     const date = new Date(timestamp);
 
     const year = date.getFullYear();
@@ -23,6 +28,40 @@ export const Card: React.FC<PostDataProps> = ({
     const day = date.getDate().toString().padStart(2, '0');
 
     return `${day}-${month}-${year}`;
+  }
+  const { mutate } = useMutation()
+  const router = useRouter()
+
+  const handleLike = async () => {
+    const response = await mutate({
+      prefixUrl: `${process.env.NEXT_PUBLIC_API}/api/likes/post/${id}`,
+      headers: {
+        'Authorization': `Bearer ${Cookies.get('user_token')}`
+      }
+    }) as ResponseDataInterface
+
+    if (response?.result.success) {
+      toast.success("Berhasil memberi like!")
+      router.reload()
+    } else {
+      toast.error("Gagal memberi like")
+    }
+  }
+
+  const handleUnlike = async () => {
+    const response = await mutate({
+      prefixUrl: `${process.env.NEXT_PUBLIC_API}/api/unlikes/post/${id}`,
+      headers: {
+        'Authorization': `Bearer ${Cookies.get('user_token')}`
+      }
+    }) as ResponseDataInterface
+
+    if (response?.result.success) {
+      toast.success("Berhasil menghapus like!")
+      router.reload()
+    } else {
+      toast.error("Gagal menghapus like")
+    }
   }
 
   return (
@@ -54,7 +93,15 @@ export const Card: React.FC<PostDataProps> = ({
           )}
         </div>
         <div className="flex flex-row w-full justify-center">
-          <button className="w-full flex flex-row gap-2 items-center justify-center">
+          <button
+            onClick={
+              (!is_like_post) ? (
+                handleLike
+              ) : (
+                handleUnlike
+              )
+            }
+            className="w-full flex flex-row gap-2 items-center justify-center">
             {(!is_like_post) ? (
               <HiOutlineHeart className="w-6 h-6" />
             ) : (

@@ -24,7 +24,7 @@ export default function Login() {
 
   const handleSubmit = async () => {
     const response = await mutate({
-      prefixUrl: "https://paace-f178cafcae7b.nevacloud.io/api/login",
+      prefixUrl: `${process.env.NEXT_PUBLIC_API}/api/login`,
       payload,
     }) as ResponseDataInterface
 
@@ -97,7 +97,7 @@ export default function Login() {
             </div>
           </Stack>
         </Flex>
-        </div>
+      </div>
     </LayoutComponent>
   )
 }
