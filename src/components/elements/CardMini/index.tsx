@@ -43,7 +43,7 @@ export const CardMini: React.FC<ReplyDataProps> = ({
       if (result?.success) {
         router.reload();
       }
-      toast.success("Berhasil menghapus notes")
+      toast.success("Berhasil menghapus reply")
     } catch (error) { 
       toast.error("gagal")
     }

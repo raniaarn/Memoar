@@ -31,7 +31,7 @@ export const FloatingPostForm = () => {
     <>
       <form onSubmit={handleSubmit}>
         <input
-          className="w-full mb-4 h-[100px] p-6 pt-0 bg-blue-100 rounded-[10px] justify-start items-start gap-4 inline-flex"
+          className="w-full mb-4 h-[50px] p-6 bg-blue-100 rounded-[10px] justify-start items-start gap-4 inline-flex"
           value={description}
           onChange={(event) => setDescription(event.target.value)}
           placeholder="What's happening ..."

@@ -5,6 +5,18 @@ import Cookies from 'js-cookie';
 import { PostDataProps } from "@/components/types/postData";
 import { Flex, Spinner } from "@chakra-ui/react";
 import { Card } from "@/components/elements/Card";
+import { useState } from "react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from '@chakra-ui/react'
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 const LayoutComponent = dynamic(
   () => import('@/components/Layout').then(mod => mod.Layout)
@@ -18,10 +30,66 @@ export const PostsModule = () => {
     }
   })
 
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState<boolean>(false)
+  const [isModalEditOpen, setIsModalEditOpen] = useState<boolean>(false)
+  const [id, setId] = useState<any>(undefined)
+  const router = useRouter()
+
+  const handleModalDeleteOpen = () => setIsModalDeleteOpen(!isModalDeleteOpen)
+  const handleModalEditOpen = () => setIsModalEditOpen(!isModalEditOpen)
+
+  const [post, setPost] = useState({
+    description: ""
+  })
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/api/post/delete/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            'Authorization': `Bearer ${Cookies.get('user_token')}`
+          }
+        },
+      )
+      const result = await response.json();
+      if (result?.success) {
+        router.reload();
+      }
+      toast.success("Berhasil menghapus post")
+    } catch (error) {
+      toast.error("gagal")
+    }
+  };
+
+  const HandleEdit = async () => {
+    try {
+      console.log(JSON.stringify({ description: post.description }))
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/api/post/update/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            'Authorization': `Bearer ${Cookies.get('user_token')}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ description: post.description })
+        })
+      const result = await response.json();
+      console.log(post.description)
+      console.log(response)
+      if (result?.success) {
+        router.reload();
+      }
+      toast.success("Berhasil mengubah post")
+    } catch (error) { }
+  }
+
   return (
     <LayoutComponent metaTitle="Posts" metaDescription="Memories">
       <div className="relative flex-col w-full justify-center items-center infline-flex mt-[100px]">
-        <div className="sticky top-[100px] w-[90%] p-4 mx-auto bg-white rounded-[10px] shadow gap-4">
+        <div className="z-10 sticky top-[100px] w-[90%] p-4 mx-auto bg-white rounded-[10px] shadow gap-4">
           <FloatingPostForm />
         </div>
         {
@@ -49,6 +117,10 @@ export const PostsModule = () => {
                   is_like_post={item.is_like_post}
                   is_own_post={item.is_own_post}
                   users_id={item.user.id}
+                  onClickDelete={handleModalDeleteOpen}
+                  onClickEdit={handleModalEditOpen}
+                  setPost={setPost}
+                  setId={setId}
                 >
                 </Card>
               </div>
@@ -56,6 +128,49 @@ export const PostsModule = () => {
           )
         }
       </div>
+
+      <Modal isOpen={isModalDeleteOpen} onClose={handleModalDeleteOpen}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Confirm Deletion</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            Are you sure you want to delete this post?
+          </ModalBody>
+
+          <ModalFooter>
+            <button onClick={handleModalDeleteOpen}>
+              Close
+            </button>
+            <button onClick={handleDelete}>Delete</button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      <Modal isOpen={isModalEditOpen} onClose={handleModalEditOpen}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Edit Post</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <div>
+              <input
+                className="w-full mb-4 h-[50px] p-6 bg-blue-100 rounded-[10px] justify-start items-start gap-4 inline-flex"
+                value={post?.description || ""}
+                onChange={(event: any) => setPost({ ...post, description: event.target.value })}
+              />
+            </div>
+          </ModalBody>
+
+          <ModalFooter>
+            <button onClick={handleModalEditOpen}>
+              Close
+            </button>
+            <button onClick={HandleEdit}>Save</button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
     </LayoutComponent>
   )
 }

@@ -1,5 +1,5 @@
 import { UserContext } from '@/components';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import React from 'react';
 import { Flex, Spinner } from '@chakra-ui/react'
 import { Card } from '@/components/elements/Card';
@@ -17,9 +17,18 @@ export const OwnPostsSection = () => {
     }
   })
 
-  const filteredData = data?.data?.filter((item: PostDataProps) => item.user.id === userData.data.id);
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState<boolean>(false)
+  const [isModalEditOpen, setIsModalEditOpen] = useState<boolean>(false)
+  const [id, setId] = useState<any>(undefined)
 
-  console.log(filteredData)
+  const handleModalDeleteOpen = () => setIsModalDeleteOpen(!isModalDeleteOpen)
+  const handleModalEditOpen = () => setIsModalEditOpen(!isModalEditOpen)
+
+  const [post, setPost] = useState({
+    description: ""
+  })
+
+  const filteredData = data?.data?.filter((item: PostDataProps) => item.user.id === userData.data.id);
 
   return (
     <div className=" flex-col w-full justify-center items-center infline-flex">
@@ -38,16 +47,20 @@ export const OwnPostsSection = () => {
           filteredData?.map((item: PostDataProps) => (
             <div className="flex w-[90%] mx-auto flex-col gap-4">
               <Card
-                id={item.id}
-                description={item.description}
-                user={item.user}
-                updated_at={item.updated_at}
-                created_at={item.updated_at}
-                likes_count={item.likes_count}
-                replies_count={item.replies_count}
-                is_like_post={item.is_like_post}
-                is_own_post={item.is_own_post}
-                users_id={item.user.id}
+                  id={item.id}
+                  description={item.description}
+                  user={item.user}
+                  updated_at={item.updated_at}
+                  created_at={item.updated_at}
+                  likes_count={item.likes_count}
+                  replies_count={item.replies_count}
+                  is_like_post={item.is_like_post}
+                  is_own_post={item.is_own_post}
+                  users_id={item.user.id}
+                  onClickDelete={handleModalDeleteOpen}
+                  onClickEdit={handleModalEditOpen}
+                  setPost={setPost}
+                  setId={setId}
               >
               </Card>
             </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { PostDataProps } from '@/components/types/postData';
+import { CardPostProps } from '@/components/types/postData';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { HiOutlineChat, HiOutlineHeart, HiHeart } from "react-icons/hi";
 import { useMutation } from '@/components';
@@ -8,8 +8,9 @@ import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
+import { EditDropdown } from '@/components';
 
-export const Card: React.FC<PostDataProps> = ({
+export const Card: React.FC<CardPostProps> = ({
   id,
   description,
   user,
@@ -19,7 +20,11 @@ export const Card: React.FC<PostDataProps> = ({
   likes_count,
   replies_count,
   is_like_post,
-  is_own_post
+  is_own_post,
+  onClickEdit,
+  onClickDelete,
+  setPost,
+  setId
 }) => {
   function formatTimestampToDate(timestamp: string): string {
     const date = new Date(timestamp);
@@ -85,10 +90,15 @@ export const Card: React.FC<PostDataProps> = ({
             </div>
           </div>
           {(is_own_post) ? (
-            <button className="w-fit h-fit">
-              <EllipsisVerticalIcon className="w-4 h-4" />
-            </button>
-
+            <div>
+              <EditDropdown
+                description={description}
+                onClickDelete={onClickDelete}
+                onClickEdit={onClickEdit}
+                setId={setId}
+                setPost={setPost}
+                id={id} />
+            </div>
           ) : (
             <></>
           )}
@@ -112,7 +122,7 @@ export const Card: React.FC<PostDataProps> = ({
           </button>
           <Link href={`posts/${id}`} className='w-full flex flex-row gap-2 items-center justify-center'>
             <button
-              className="">
+              className="flex flex-row gap-2">
               <HiOutlineChat className="w-6 h-6" />
               {replies_count} Replies
             </button>
