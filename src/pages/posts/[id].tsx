@@ -63,7 +63,6 @@ export default function Posts() {
         is_like_post={post.is_like_post}
         is_own_post={post.is_own_post}
         replies_count={post.replies_count} />
-
     )
   } else {
     return null;

@@ -1,6 +1,9 @@
 import React from 'react'
 import { ReplyDataProps } from '@/components/types/postData';
 import { TrashIcon } from '@heroicons/react/20/solid'
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
 
 export const CardMini: React.FC<ReplyDataProps> = ({
   id,
@@ -13,6 +16,8 @@ export const CardMini: React.FC<ReplyDataProps> = ({
   created_at,
   is_own_reply
 }) => {
+  const router = useRouter()
+
   function formatTimestampToDate(timestamp: string): string {
     const date = new Date(timestamp);
 
@@ -22,6 +27,27 @@ export const CardMini: React.FC<ReplyDataProps> = ({
 
     return `${day}-${month}-${year}`;
   }
+
+  const HandleDelete = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/api/replies/delete/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            'Authorization': `Bearer ${Cookies.get('user_token')}`
+          }
+        },
+      )
+      const result = await response.json();
+      if (result?.success) {
+        router.reload();
+      }
+      toast.success("Berhasil menghapus notes")
+    } catch (error) { 
+      toast.error("gagal")
+    }
+  };
 
   return (
     <div key={id} className="w-full flex-col justify-center items-center mt-4 w-[90%] mx-auto">
@@ -42,7 +68,9 @@ export const CardMini: React.FC<ReplyDataProps> = ({
             </div>
           </div>
           {(is_own_reply) ? (
-            <button className="w-fit h-fit">
+            <button
+              onClick={HandleDelete}
+              className="w-fit h-fit">
               <TrashIcon className="w-4 h-4" />
             </button>
           ) : (
