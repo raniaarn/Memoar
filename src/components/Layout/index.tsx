@@ -1,12 +1,7 @@
 import Head from "next/head";
 import { Navbar, Footer } from '@/components/elements'
-import React, { ReactNode } from 'react';
-
-type LayoutProps = {
-  children: ReactNode;
-  metaTitle?: string;
-  metaDescription?: string;
-};
+import React from 'react';
+import { LayoutProps } from "../types/layoutProps";
 
 export const Layout: React.FC<LayoutProps> = ({ children, metaTitle, metaDescription }) => {
   return (

@@ -12,23 +12,29 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "next"
     ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "rules": {
-        
-        "react/jsx-filename-extension": [
+        "react/tsx-filename-extension": [
             1,
             {
                 "extensions": [
-                    ".js",
-                    ".jsx"
+                    ".tsx",
+                    ".ts"
                 ]
             }
         ],
         "object-curly-newline": [
             "error",
             {
-                "ObjectExpression": "always",
+                "ObjectExpression": {
+                    "consistent": true
+                },
                 "ObjectPattern": {
                     "multiline": true
                 },
@@ -40,12 +46,6 @@
             }
         ],
         "beforeStatementContinuationChars": "off",
-        "quotes": [
-            2,
-            "single",
-            {
-                "avoidEscape": true
-            }
-        ]
+        "import/no-duplicates": "off"
     }
 }
