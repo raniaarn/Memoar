@@ -36,7 +36,7 @@ export const Navbar = () => {
                 <Link href={"/posts"} className='text-blue-500'>
                   Posts
                 </Link>
-                <Link href={"/"} className='text-blue-500'>
+                <Link href={"/notifications"} className='text-blue-500'>
                   Notifications
                 </Link>
                 <DropDown username={userData?.data?.name} />
