@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <ChakraProvider>
       <UserContextProvider>
         <Component {...pageProps} />
-        <div><Toaster /></div>
+        <Toaster />
       </UserContextProvider>
     </ChakraProvider>
   )

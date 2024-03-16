@@ -48,7 +48,7 @@ export const RepliesModule: React.FC<PostDataProps> = ({
 
   return (
     <LayoutComponent metaTitle="Post" metaDescription="Memoar Post">
-      <div className='mt-[100px]'>
+      <div className='mt-[100px] mb-[100px]'>
         <div className="w-[90%] flex-col justify-center items-center mt-4 w-[90%] mx-auto">
           <div className="flex-col w-full justify-center items-center bg-white rounded-[10px] gap-2 inline-flex shadow pb-4">
             <div className='w-full px-4 py-4 flex'>
