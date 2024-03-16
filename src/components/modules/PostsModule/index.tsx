@@ -77,12 +77,10 @@ export const PostsModule = () => {
           body: JSON.stringify({ description: post.description })
         })
       const result = await response.json();
-      console.log(post.description)
-      console.log(response)
       if (result?.success) {
+        toast.success("Berhasil mengubah post")
         router.reload();
       }
-      toast.success("Berhasil mengubah post")
     } catch (error) { }
   }
 
@@ -139,10 +137,13 @@ export const PostsModule = () => {
           </ModalBody>
 
           <ModalFooter>
-            <button onClick={handleModalDeleteOpen}>
-              Close
-            </button>
-            <button onClick={handleDelete}>Delete</button>
+            <div className="w-full flex flex-row gap-4">
+              <button className="w-full px-6 py-2 border-2 border-blue-600 rounded-md justify-center items-center text-black text-lg" onClick={handleDelete}>
+                Delete
+              </button>
+              <button className="w-full px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-900 text-white  rounded-md justify-center items-center gap-2 inline-flex"
+                onClick={handleModalDeleteOpen}>Cancel</button>
+            </div>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -155,7 +156,7 @@ export const PostsModule = () => {
           <ModalBody>
             <div>
               <input
-                className="w-full mb-4 h-[50px] p-6 bg-blue-100 rounded-[10px] justify-start items-start gap-4 inline-flex"
+                className="w-full pt-0 h-[80px] p-6 bg-blue-100 rounded-[10px] justify-start items-start gap-4 inline-flex"
                 value={post?.description || ""}
                 onChange={(event: any) => setPost({ ...post, description: event.target.value })}
               />
@@ -163,10 +164,13 @@ export const PostsModule = () => {
           </ModalBody>
 
           <ModalFooter>
-            <button onClick={handleModalEditOpen}>
-              Close
-            </button>
-            <button onClick={HandleEdit}>Save</button>
+            <div className="w-full flex flex-row gap-4">
+              <button className="w-full px-6 py-2 border-2 border-blue-600 rounded-md justify-center items-center text-black text-lg" onClick={handleModalEditOpen}>
+                Close
+              </button>
+              <button className="w-full px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-900 text-white  rounded-md justify-center items-center gap-2 inline-flex"
+                onClick={HandleEdit}>Save</button>
+            </div>
           </ModalFooter>
         </ModalContent>
       </Modal>

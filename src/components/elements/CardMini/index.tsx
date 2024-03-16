@@ -9,10 +9,6 @@ export const CardMini: React.FC<ReplyDataProps> = ({
   id,
   description,
   user,
-  posts_id,
-  users_id,
-  deleted_at,
-  updated_at,
   created_at,
   is_own_reply
 }) => {

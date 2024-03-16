@@ -42,7 +42,6 @@ export const RepliesModule: React.FC<PostDataProps> = ({
       toast.error("Gagal reply :(")
     } else {
       toast.success("Berhasil reply!")
-      router.reload()
     }
   }
 
