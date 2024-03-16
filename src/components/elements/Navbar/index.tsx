@@ -11,7 +11,7 @@ export const Navbar = () => {
   const userData = useContext(UserContext)
   const [isCollapsed, setIsCollapsed] = useState(true)
   const pathname = usePathname()
-  const isLoginPage = pathname.startsWith('/login');
+  const isLoginPage = pathname && pathname.startsWith('/login');
 
   const handleNavCollapse = () => setIsCollapsed(!isCollapsed)
 
@@ -33,7 +33,7 @@ export const Navbar = () => {
           (userData?.data) ?
             (
               <div className="items-center gap-7 hidden md:flex">
-                <Link href={"/"} className='text-blue-500'>
+                <Link href={"/posts"} className='text-blue-500'>
                   Posts
                 </Link>
                 <Link href={"/"} className='text-blue-500'>
@@ -72,7 +72,7 @@ export const Navbar = () => {
           (userData?.data) ?
             (
               <>
-                <Link href={"/"} className='text-blue-500'>
+                <Link href={"/posts"} className='text-blue-500'>
                   Posts
                 </Link>
                 <Link href={"/"} className='text-blue-500'>

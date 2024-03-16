@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { PostDataProps } from '@/components/types/postData';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { HiOutlineChat, HiOutlineHeart, HiHeart } from "react-icons/hi";
@@ -7,6 +7,7 @@ import { ResponseDataInterface } from '@/components/types/responseData';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
+import Link from 'next/link';
 
 export const Card: React.FC<PostDataProps> = ({
   id,
@@ -109,12 +110,17 @@ export const Card: React.FC<PostDataProps> = ({
             )}
             {likes_count} Like
           </button>
-          <button className="w-full flex flex-row gap-2 items-center justify-center">
-            <HiOutlineChat className="w-6 h-6" />
-            {replies_count} Replies
-          </button>
+          <Link href={`posts/${id}`} className='w-full flex flex-row gap-2 items-center justify-center'>
+            <button
+              className="">
+              <HiOutlineChat className="w-6 h-6" />
+              {replies_count} Replies
+            </button>
+          </Link>
         </div>
       </div>
     </div>
+
+
   )
 }
