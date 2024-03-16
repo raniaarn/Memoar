@@ -19,7 +19,7 @@ export const PostsModule = () => {
   })
 
   return (
-    <LayoutComponent>
+    <LayoutComponent metaTitle="Posts" metaDescription="Memories">
       <div className="relative flex-col w-full justify-center items-center infline-flex mt-[100px]">
         <div className="sticky top-[100px] w-[90%] p-4 mx-auto bg-white rounded-[10px] shadow gap-4">
           <FloatingPostForm />
@@ -48,6 +48,7 @@ export const PostsModule = () => {
                   replies_count={item.replies_count}
                   is_like_post={item.is_like_post}
                   is_own_post={item.is_own_post}
+                  users_id={item.user.id}
                 >
                 </Card>
               </div>

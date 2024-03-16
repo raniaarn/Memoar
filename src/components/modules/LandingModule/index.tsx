@@ -25,12 +25,12 @@ export const LandingModule = () => {
               priority
             />
           </div>
-          <div className="text-black font-bold text-[18px] sm:text-[32px]">Ring the Bell of Your Memories!</div>
+          <div className="text-black text-center font-bold text-[18px] sm:text-[32px]">Ring the Bell of Your Memories!</div>
           {!userData?.data ?
             (
               <Link href="/register">
                 <button
-                  className="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-900 rounded-md justify-center items-center text-white text-lg">
+                  className="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-900 rounded-md justify-center items-center text-white text-lg ">
                   Join Memoar now!
                 </button>
               </Link>

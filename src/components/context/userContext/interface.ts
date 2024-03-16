@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export interface UserDetails {
-  id: string;
+  id: number;
   name: string;
   email: string;
   dob?: string;

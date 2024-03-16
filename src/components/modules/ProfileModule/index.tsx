@@ -1,4 +1,4 @@
-import { ProfileDataSection } from "./sections"
+import { ProfileDataSection, OwnPostsSection } from "./sections"
 import dynamic from "next/dynamic";
 
 const LayoutComponent = dynamic(
@@ -6,12 +6,12 @@ const LayoutComponent = dynamic(
 );
 
 export const ProfileModule = () => (
-  <LayoutComponent>
-    <div className="mx-auto my-auto h-screen flex flex-col justify-center items-center">
-
-      <section>
-        <ProfileDataSection />
-      </section>
+  <LayoutComponent metaTitle="Profile" metaDescription="My Profile">
+    <div className="mx-auto flex flex-col justify-center items-center">
+      <div className="mt-[120px] mb-[48px]">
+      <ProfileDataSection />
+      </div>
+      <OwnPostsSection />
     </div>
   </LayoutComponent>
 )

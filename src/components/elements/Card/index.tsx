@@ -7,6 +7,7 @@ export const Card: React.FC<PostDataProps> = ({
   id,
   description,
   user,
+  users_id,
   updated_at,
   created_at,
   likes_count,

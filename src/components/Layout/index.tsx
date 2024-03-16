@@ -16,8 +16,8 @@ export const Layout: React.FC<LayoutProps> = ({ children, metaTitle, metaDescrip
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-        {children}
+      {children}
       <Footer />
     </>
-  );
-};
+  )
+}
