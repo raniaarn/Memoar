@@ -25,7 +25,7 @@ export const LandingModule = () => {
               priority
             />
           </div>
-          <div className="text-black font-bold xl:text-[32px]">Ring the Bell of Your Memories!</div>
+          <div className="text-black font-bold text-[18px] sm:text-[32px]">Ring the Bell of Your Memories!</div>
           {!userData?.data ?
             (
               <Link href="/register">
@@ -46,7 +46,7 @@ export const LandingModule = () => {
           }
 
         </div>
-        </div>
+      </div>
     </LayoutComponent>
   )
 }
